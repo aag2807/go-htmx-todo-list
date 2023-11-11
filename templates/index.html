@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <script src="https://unpkg.com/htmx.org@1.9.8"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            transition: all 200ms ease-in;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="p-4 min-w-screen min-h-screen bg-[#e0e0e0] flex flex-col items-center ">
+        <section class=" flex flex-col items-center m-5 bg-white w-[500px] rounded-lg shadow py-4">
+            <h4 class="text-3xl">Todo List</h4>
+            <form hx-on::after-request="this.reset()" class="mt-3" hx-post="/add-todo" hx-target="#todo-list-container"
+                hx-swap="beforeend">
+                <section class="flex gap-4">
+                    <input required class="rounded border-1 border border-slate-600 px-4 py-2 " name="todo" id="todo"
+                        type="text">
+                    <button type="submit"
+                        class="hover:opacity-75 hover:bg-slate-300 rounded border-1 border border-slate-600 px-4 py-2 ">Add
+                        Todo</button>
+                </section>
+            </form>
+
+
+            <section id="todo-list-container" class="my-6  w-full flex flex-col gap-4 items-center justify-center">
+                    
+            </section>
+        </section>
+    </main>
+
+    <script>
+        function deleteSelf(event) {
+            event.target.remove();
+        }
+    </script>
+</body>
+
+</html>
